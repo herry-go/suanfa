@@ -7,6 +7,16 @@ import (
 	"strings"
 )
 
+// 这是一个Go程序，从标准输入读取输入并进行处理。程序从标准输入读取字符矩阵，并查找与矩阵边界相连的最大连通分量的“o”字符。然后程序输出此连通分量的大小
+// 和其中一个单元格的坐标。
+//
+// 程序使用扫描仪从标准输入读取输入，并在主函数中进行处理。主函数从标准输入读取矩阵并将其存储在2D字符串切片中。然后函数遍历矩阵边界上的单元格，并在包
+// 含“o”的每个单元格上调用calc函数。calc函数递归地探索包含输入单元格的“o”单元格的连通分量，并返回此组件的大小。主函数将最大连通分量的大小存储在
+// maxCount变量中，并将所有大小与最大组件相同的连通分量的大小存储在映射中。然后主函数遍历映射中的键，并输出最大连通分量的大小和其中一个单元格的坐标。如果有多个大小相同的连通分量，则程序仅输出最大组件的大小。
+//
+// calc函数以矩阵的副本、单元格的坐标和一个布尔标志作为输入，该标志指示单元格是否在矩阵的边界上。该函数递归地探索包含输入单元格的“o”单元格的连通分量，并返回此组件的大小。该函数使用“x”标记每个探索的单元格，以避免再次探索它。
+//
+// copy函数以矩阵作为输入并返回矩阵的副本。该函数用于在调用calc函数之前创建矩阵的副本，以避免修改原始矩阵。
 func main() {
 
 	scanner := bufio.NewScanner(os.Stdin)
@@ -70,26 +80,26 @@ func main() {
 
 			}
 
-			var maxKey string = ""
-			for key, value := range maps {
-				if value == maxCount {
-					if maxKey == "" {
-						maxKey = key
-					} else {
-						maxKey = "more"
-						break
-					}
+		}
+
+		var maxKey string = ""
+		for key, value := range maps {
+			if value == maxCount {
+				if maxKey == "" {
+					maxKey = key
+				} else {
+					maxKey = "more"
+					break
 				}
 			}
+		}
 
-			if maxCount == 0 {
-				fmt.Println("NULL")
-			} else if maxKey == "more" {
-				fmt.Println(maxCount)
-			} else {
-				fmt.Println(maxKey, maxCount)
-			}
-
+		if maxCount == 0 {
+			fmt.Println("NULL")
+		} else if maxKey == "more" {
+			fmt.Println(maxCount)
+		} else {
+			fmt.Println(maxKey, maxCount)
 		}
 
 	}
