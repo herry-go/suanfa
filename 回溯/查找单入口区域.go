@@ -33,7 +33,7 @@ func main() {
 		maps := make(map[string]int)
 		for j := 0; j < n; j++ {
 			if ca[0][j] == "o" {
-				count := calc(copy(ca), 0, j, true)
+				count := calc(Copy(ca), 0, j, true)
 				if count > 0 {
 					key := fmt.Sprintf("%d %d", 0, j)
 					maps[key] = count
@@ -44,7 +44,7 @@ func main() {
 			}
 
 			if ca[m-1][j] == "o" {
-				count2 := calc(copy(ca), m-1, j, true)
+				count2 := calc(Copy(ca), m-1, j, true)
 				if count2 > 0 {
 					key := fmt.Sprintf("%d %d", m-1, j)
 					maps[key] = count2
@@ -57,7 +57,7 @@ func main() {
 
 		for i := 1; i < m-1; i++ {
 			if ca[i][0] == "o" {
-				count := calc(copy(ca), i, 0, true)
+				count := calc(Copy(ca), i, 0, true)
 				if count > 0 {
 					key := fmt.Sprintf("%d %d", i, 0)
 					maps[key] = count
@@ -68,7 +68,7 @@ func main() {
 			}
 
 			if ca[i][n-1] == "o" {
-				count2 := calc(copy(ca), i, n-1, true)
+				count2 := calc(Copy(ca), i, n-1, true)
 				if count2 > 0 {
 					key := fmt.Sprintf("%d %d", i, n-1)
 					maps[key] = count2
@@ -151,7 +151,7 @@ func calc(ca [][]string, i int, j int, isRuKou bool) int {
 	return count
 }
 
-func copy(ca [][]string) [][]string {
+func Copy(ca [][]string) [][]string {
 	m := len(ca)
 	n := len(ca[0])
 	newCa := make([][]string, m)
